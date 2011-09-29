@@ -1,0 +1,67 @@
+NAME
+    Process::KillTree - Kill process and all its descendants (children,
+    grandchildren, ...)
+
+VERSION
+    version 0.01
+
+SYNOPSIS
+     use Process::KillTree qw(kill_tree);
+
+     my $pid = ...;
+     kill_tree pid => $pid, signal => 'KILL';
+
+DESCRIPTION
+    This module provides kill_tree().
+
+FUNCTIONS
+    None are exported by default, but they are exportable.
+
+  kill_tree(%args) -> RESULT
+    Kill process and all its descendants (children, grandchildren, ...).
+
+    To find out about child processes, Sys::Statistics::Linux::Processes is
+    used on Linux. Croaks on other operating systems.
+
+    Returns the killed PIDs.
+
+    This function supports dry-run (simulation) mode. To run in dry-run
+    mode, add argument "-dry_run" => 1.
+
+    Arguments ("*" denotes required arguments):
+
+    *   action => *code*
+
+        If specified, will call action instead of killing the processes.
+
+        Code will be supplied $pids, an arrayref containing all the PIDs to
+        kill.
+
+    *   pid => *int*
+
+        Process ID to kill.
+
+        Either pid or pids must be specified
+
+    *   pids => *array*
+
+        Process IDs to kill.
+
+        Either pid or pids must be specified
+
+    *   signal => *str* (default "TERM")
+
+        Signal to use, either numeric (e.g. 1), or string (e.g. KILL).
+
+SEE ALSO
+    Process::KillGroup
+
+AUTHOR
+    Steven Haryanto <stevenharyanto@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2011 by Steven Haryanto.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
