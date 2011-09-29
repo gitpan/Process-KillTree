@@ -10,7 +10,7 @@ use Process::KillTree;
 
 our @EXPORT_OK = qw(kill_group);
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 our %SPEC;
 
@@ -33,7 +33,7 @@ Process::KillGroup - Kill process and all other belonging to the same process gr
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

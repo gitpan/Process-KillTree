@@ -7,7 +7,7 @@ use warnings;
 use Exporter::Lite;
 our @EXPORT_OK = qw(kill_tree);
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 our %SPEC;
 
@@ -112,48 +112,6 @@ sub kill_tree {
     return \@pids;
 }
 
-$SPEC{kill_tree} = {
-    summary => 'Kill process and all its descendants '.
-        '(children, grandchildren, ...)',
-    description => <<'_',
-
-To find out about child processes, Sys::Statistics::Linux::Processes is used on
-Linux. Croaks on other operating systems.
-
-Returns the killed PIDs.
-
-_
-    args => {
-        pid => ['int' => {
-            summary => 'Process ID to kill',
-            description => 'Either pid or pids must be specified',
-        }],
-        pids => ['array' => {
-            of => 'int*',
-            summary => 'Process IDs to kill',
-            description => 'Either pid or pids must be specified',
-        }],
-        signal => ['str' => {
-            summary => 'Signal to use, either numeric (e.g. 1), '.
-                'or string (e.g. KILL)',
-            default => 'TERM',
-        }],
-        action => ['code' => {
-            summary => 'If specified, will call action instead of killing '.
-                'the processes',
-            description => <<'_',
-
-Code will be supplied $pids, an arrayref containing all the PIDs to kill.
-
-_
-        }],
-    },
-    result_naked => 1,
-    features => {
-        dry_run => 1,
-    },
-};
-
 1;
 # ABSTRACT: Kill process and all its descendants (children, grandchildren, ...)
 
@@ -166,7 +124,7 @@ Process::KillTree - Kill process and all its descendants (children, grandchildre
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

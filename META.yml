@@ -16,9 +16,10 @@ name: Process-KillTree
 requires:
   Data::Clone: 0
   Exporter::Lite: 0
+  Sub::Spec: 1.0.3
   Test::More: 0.96
   perl: 5.010000
 resources:
   homepage: http://search.cpan.org/dist/Process-KillTree/
   repository: http://github.com/sharyanto/perl-Process-KillTree
-version: 0.01
+version: 0.02
