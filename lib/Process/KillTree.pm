@@ -7,7 +7,7 @@ use warnings;
 use Exporter::Lite;
 our @EXPORT_OK = qw(kill_tree);
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 our %SPEC;
 
@@ -124,7 +124,7 @@ Process::KillTree - Kill process and all its descendants (children, grandchildre
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -137,12 +137,14 @@ version 0.02
 
 This module provides kill_tree().
 
+=head1 SEE ALSO
+
+L<Process::KillGroup>
+
 =head1 FUNCTIONS
 
-None are exported by default, but they are exportable.
 
-=head2 kill_tree(%args) -> RESULT
-
+=head2 kill_tree(%args) -> [status, msg, result, meta]
 
 Kill process and all its descendants (children, grandchildren, ...).
 
@@ -151,10 +153,7 @@ Linux. Croaks on other operating systems.
 
 Returns the killed PIDs.
 
-This function supports dry-run (simulation) mode. To run in dry-run mode, add
-argument C<-dry_run> => 1.
-
-Arguments (C<*> denotes required arguments):
+Arguments ('*' denotes required arguments):
 
 =over 4
 
@@ -176,15 +175,15 @@ Process IDs to kill.
 
 Either pid or pids must be specified
 
-=item * B<signal> => I<str> (default C<"TERM">)
+=item * B<signal> => I<str> (default: "TERM")
 
 Signal to use, either numeric (e.g. 1), or string (e.g. KILL).
 
 =back
 
-=head1 SEE ALSO
+Return value:
 
-L<Process::KillGroup>
+Returns an enveloped result (an array). First element (status) is an integer containing HTTP status code (200 means OK, 4xx caller error, 5xx function error). Second element (msg) is a string containing error message, or 'OK' if status is 200. Third element (result) is optional, the actual result. Fourth element (meta) is called result metadata and is optional, a hash that contains extra information.
 
 =head1 AUTHOR
 
@@ -192,7 +191,7 @@ Steven Haryanto <stevenharyanto@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Steven Haryanto.
+This software is copyright (c) 2012 by Steven Haryanto.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
